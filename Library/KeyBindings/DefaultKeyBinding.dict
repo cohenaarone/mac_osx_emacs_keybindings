@@ -1,0 +1,161 @@
+/* Additional keybindings for emacs emulation
+ *
+ * Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen
+ *
+ * WARNING:
+ *
+ * This file uses the Option key as a meta key.  This has the side-effect * of overriding Mac OS keybindings for the option key, which generally
+ * produce common symbols and non-English letters.
+ *
+ * NOTES:
+ *
+ * We use cut:, copy:, paste: rather than deleteToMark:, selectToMark:, yank:, deleteToEndOfParagraph: (i.e. kill) because selectToMark only highlights; it doesn't copy.
+ * We thus lose the kill ring, but gain a working ~w.  (Using ( "deleteToMark:", "yank:" ) for ~w removes formatting, and repeated use hoses the kill ring.)
+ * *However*, this in turn breaks use of "...AndModifySelection:" bindings *unless* one sets the mark before commencing a new use of those bindings.  Sigh.
+ *
+ * To see what Mac OSX defines for you in xml syntax, run the following at a terminal prompt and then open ~/mac_key_bindings.dict in an editor:
+ *
+ * plutil -convert xml1 /System/Library/Frameworks/AppKit.framework/Versions/C/Resources/StandardKeyBinding.dict -o ~/mac_key_bindings.dict
+ *
+ * To set up C-u to be the repeat count keybinding, run the following at a terminal prompt.
+ * Be aware that if you do this, *any* use of C-u (even within a sequence of keys) will eval to the repeat count method
+ *
+ * defaults write -g NSRepeatCountBinding -string "^u"
+ *
+ * Useful selectors not yet incorporated below, because AFAIK emacs doesn't have them by default:
+ *
+ * "changeCaseOfLetter:"
+ * "selectLine:"
+ *
+ */
+
+    /* Ctrl shortcuts */
+
+    "^/"        = "undo:";                                 /* C-/          Undo */
+    "^z"        = "undo:";                                 /* C-z          Undo - *not Emacs standard* */
+
+    "^ "        = "setMark:";                              /* C-Spc        Set mark */
+    "^w"        = ( "selectToMark:", "cut:" );             /* C-w          Highlight and cut to mark onto general pasteboard */
+    "^y"        = "paste:";                                /* C-y          Paste from general pasteboard (overriding default binding of "yank:"!)  */
+
+    "^g"        = "cancelOperation:";                      /* C-g          Bail out; could also use "_cancelKey:" */
+
+    /* rebinding shortcuts that already have a binding */
+    "^a"        = "moveToLeftEndOfLine:";                    /* instead of paragraph */
+    "^A"        = "moveToLeftEndOfLineAndModifySelection:";  /* instead of paragraph */
+
+    "^e"        = "moveToRightEndOfLine:";                    /* instead of paragraph */
+    "^E"        = "moveToRightEndOfLineAndModifySelection:";  /* instead of paragraph */
+
+    /* Meta shortcuts */
+
+    "~w"        = ( "selectToMark:", "copy:" );           /* M-w           Highlight and copy to mark onto general pasteboard */
+
+    "~m"        = ( "moveToBeginningOfLine:",
+                    "moveWordForward:",
+                    "moveWordBackward:" );                 /* M-m          Move to first non-whitespace, non-symbol char of line */
+
+    "~f"        = "moveWordForward:";                      /* M-f          Move forward word */
+    "~F"        = "moveWordForwardAndModifySelection:";    /* M-F          Move forward word and modify selection */
+
+    "~b"        = "moveWordBackward:";                     /* M-b          Move backward word */
+    "~B"        = "moveWordBackwardAndModifySelection:";   /* M-b          Move backward word and modify selection */
+
+    "~d"        = "deleteWordForward:";                    /* M-d          Delete word forward */
+    "~\U007F"   = "deleteWordBackward:";                   /* M-Bksp       Delete word backward */
+
+    "~<"        = "moveToBeginningOfDocument:";            /* M-<          Move to beginning of document */
+    "~>"        = "moveToEndOfDocument:";                  /* M->          Move to end of document */
+
+    "~v"        = "pageUp:";                               /* M-v          Page Up */
+    "~p"        = "pageUp:";                               /* M-p          Page Up - *not Emacs standard* */
+
+    "~n"        = "pageDown:";                             /* M-n          Page Down - *not Emacs standard*. DOESN'T WORK because ~n not rebindable!! */
+    "~N"        = "pageDownAndModifySelection:";           /* M-n          Page Down and modify selection - *not Emacs standard* */
+
+    "~/"        = "complete:";                             /* M-/          Complete (uses English dictionary rather than current doc symbols, thus silly) */
+
+    "~c"        = ( "capitalizeWord:",
+                    "moveForward:" );                      /* M-c          Capitalize word or words in region - the latter is NOT emacs standard */
+    "~l"        = ( "lowercaseWord:",
+                    "moveForward:" );                      /* M-l          Lowercase word or words in region - the latter is NOT emacs standard */
+    "~U"        = ( "uppercaseWord:",
+                    "moveForward:" );                      /* M-u          Uppercase word or words in region  - the latter is NOT emacs standard */
+                                                           /*              ... Use ~U rather than ~u because ~u is not rebindable. */
+
+    "~t"        = "transposeWords:";                       /* M-t          Transpose words ... DOESN'T WORK: "transposeWords:" is buggy */
+
+    "~\\@"      = ( "moveWordBackward:",
+                    "setMark:",
+                    "selectWord:" );                       /* M-@          Highlight word, setting mark at its beginning (@ means Command key if unescaped) */
+    "~h"        = ( "moveToBeginningOfParagraph:",
+                    "setMark:",
+                    "selectParagraph:" );                  /* M-h          Highlight paragraph, setting mark at its beginning */
+
+    "~z"        = "redo:";                                 /* M-z          Redo - NOT emacs standard  */
+
+    "~a"        = ( "moveBackward:",
+                    "moveToBeginningOfParagraph:" );
+    "~^a"       = ( "moveBackward:",
+                    "moveToBeginningOfParagraph:" );  /* Added because ~^e is necessitated  */
+    "~A"        = ( "moveBackwardAndModifySelection:",
+                    "moveToBeginningOfParagraphAndModifySelection:" );
+    "~^A"       = ( "moveBackwardAndModifySelection:",
+                    "moveToBeginningOfParagraphAndModifySelection:" );  /* Added because ~^e is necessitated  */
+
+    "~e"        = ( "moveForward:",
+                    "moveToEndOfParagraph:" );  /* DOESN'T WORK: ~e not rebindable */
+    "~^e"       = ( "moveForward:",
+                    "moveToEndOfParagraph:" );
+    "~E"        = ( "moveForwardAndModifySelection:",
+                    "moveToEndOfParagraphAndModifySelection:" );
+    "~^E"       = ( "moveForwardAndModifySelection:",
+                    "moveToEndOfParagraphAndModifySelection:" );  /* Added because ~^e is necessitated  */
+
+    /* C-x shortcuts */
+
+    "^x" = {
+        "u"     = "undo:";                          /* C-x u        Undo */
+
+        "^u"    = ( "uppercaseWord:",
+                    "moveForward:" );               /* C-x C-u      Uppercase word or words in region standard - won't work if you rebound ^u to be repeat count */
+        "^l"   = ( "lowercaseWord:",
+                   "moveForward:" );                /* C-x C-l      Lowercase word or words in region */
+
+        "h"     = "selectAll:";                     /* C-x h        Select All */
+
+        "^x"    = "swapWithMark:";                  /* C-x C-x      Swap point with mark */
+
+        "k"     = "performClose:";                  /* C-x k        Close */
+
+        "^f"    = "openDocument:";                  /* C-x C-f      Open (find file) ... DOESN'T WORK: "openDocument:" is buggy */
+
+        "^s"    = "save:";                          /* C-x C-s      Save ... works in some apps, not in others */
+        "^w"    = "saveAs:";                        /* C-x C-w      Save as ... doesn't seem to work */
+    };
+
+    /* Windows Bindings */
+
+    "^\U007F"  = "deleteWordBackward:";                          /* C-Bksp    Delete word backward */
+
+    "\UF728"   = "deleteForward:";                               /* Del */
+    "^\UF728"  = "deleteWordForward:";                           /* C-Del     Delete word forward */
+
+    "\UF729"   = "moveToBeginningOfLine:";                       /* Home */
+    "$\UF729"  = "moveToBeginningOfLineAndModifySelection:";     /* Shift-Home */
+
+    "^\UF729"  = "moveToBeginningOfDocument:";                   /* Ctrl-Home */
+    "^$\UF729" = "moveToBeginningOfDocumentAndModifySelection:"; /* Ctrl-Shift-Home */
+
+    "\UF72B"   = "moveToEndOfLine:";                             /* End */
+    "$\UF72B"  = "moveToEndOfLineAndModifySelection:";           /* Shift-End */
+
+    "^\UF72B"  = "moveToEndOfDocument:";                         /* Ctrl-End */
+    "^$\UF72B" = "moveToEndOfDocumentAndModifySelection:";       /* Ctrl-Shift-End */
+
+    "\UF72C"   = "pageUp:";                                      /* Page Up */
+    "$\UF72C"  = "pageUpAndModifySelection:";                    /* Shift-Page Up */
+
+    "\UF72D"   = "pageDown:";                                    /* Page Down */
+    "$\UF72D"  = "pageDownAndModifySelection:";                  /* Shift-Page Down */
+}
