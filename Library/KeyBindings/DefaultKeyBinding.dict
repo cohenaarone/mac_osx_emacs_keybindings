@@ -4,7 +4,7 @@
  *
  * WARNING:
  *
- * This file uses the Option key as a meta key.  This has the side-effect * of overriding Mac OS keybindings for the option key, which generally
+ * This file uses the Option key as a meta key.  This has the side-effect of overriding Mac OS keybindings for the option key, which generally
  * produce common symbols and non-English letters.
  *
  * NOTES:
@@ -13,7 +13,7 @@
  * We thus lose the kill ring, but gain a working ~w.  (Using ( "deleteToMark:", "yank:" ) for ~w removes formatting, and repeated use hoses the kill ring.)
  * *However*, this in turn breaks use of "...AndModifySelection:" bindings *unless* one sets the mark before commencing a new use of those bindings.  Sigh.
  *
- * To see what Mac OSX defines for you in xml syntax, run the following at a terminal prompt and then open ~/mac_key_bindings.dict in an editor:
+ * To see what Mac OSX defines for you in xml syntax, run the following at a terminal prompt and then open ~/mac_key_bindings.dict in emacs:
  *
  * plutil -convert xml1 /System/Library/Frameworks/AppKit.framework/Versions/C/Resources/StandardKeyBinding.dict -o ~/mac_key_bindings.dict
  *
@@ -22,17 +22,15 @@
  *
  * defaults write -g NSRepeatCountBinding -string "^u"
  *
- * Useful selectors not yet incorporated below, because AFAIK emacs doesn't have them by default:
- *
- * "changeCaseOfLetter:"
- * "selectLine:"
+ * More info about the most common selectors (i.e. where most of the below comes from) -
+ *   https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html
  *
  */
 
     /* Ctrl shortcuts */
 
     "^/"        = "undo:";                                 /* C-/          Undo */
-    "^z"        = "undo:";                                 /* C-z          Undo - *not Emacs standard* */
+    "^z"        = "undo:";                                 /* C-z          Undo - NOT emacs standard */
 
     "^ "        = "setMark:";                              /* C-Spc        Set mark */
     "^w"        = ( "selectToMark:", "cut:" );             /* C-w          Highlight and cut to mark onto general pasteboard */
@@ -68,10 +66,10 @@
     "~>"        = "moveToEndOfDocument:";                  /* M->          Move to end of document */
 
     "~v"        = "pageUp:";                               /* M-v          Page Up */
-    "~p"        = "pageUp:";                               /* M-p          Page Up - *not Emacs standard* */
+    "~p"        = "pageUp:";                               /* M-p          Page Up - NOT emacs standard */
 
-    "~n"        = "pageDown:";                             /* M-n          Page Down - *not Emacs standard*. DOESN'T WORK because ~n not rebindable!! */
-    "~N"        = "pageDownAndModifySelection:";           /* M-n          Page Down and modify selection - *not Emacs standard* */
+    "~n"        = "pageDown:";                             /* M-n          Page Down - NOT emacs standard. DOESN'T WORK because ~n not rebindable!! */
+    "~N"        = "pageDownAndModifySelection:";           /* M-n          Page Down and modify selection - NOT emacs standard */
 
     "~/"        = "complete:";                             /* M-/          Complete (uses English dictionary rather than current doc symbols, thus silly) */
 
@@ -118,7 +116,7 @@
         "u"     = "undo:";                          /* C-x u        Undo */
 
         "^u"    = ( "uppercaseWord:",
-                    "moveForward:" );               /* C-x C-u      Uppercase word or words in region standard - won't work if you rebound ^u to be repeat count */
+                    "moveForward:" );               /* C-x C-u      Uppercase word or words in region - won't work if you rebound ^u to be repeat count */
         "^l"   = ( "lowercaseWord:",
                    "moveForward:" );                /* C-x C-l      Lowercase word or words in region */
 
@@ -132,6 +130,12 @@
 
         "^s"    = "save:";                          /* C-x C-s      Save ... works in some apps, not in others */
         "^w"    = "saveAs:";                        /* C-x C-w      Save as ... doesn't seem to work */
+    };
+
+    /* C-c shortcuts */
+
+    "^c" = {
+         "l"    = "selectLine:";                   /* C-c l         Select line - NOT emacs standard */
     };
 
     /* Windows Bindings */
