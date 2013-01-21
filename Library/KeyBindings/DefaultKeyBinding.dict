@@ -1,6 +1,7 @@
 /* Additional keybindings for emacs emulation
  *
- * Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen
+ * Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen.
+ *
  * Sources:
  *   http://www.hcs.harvard.edu/%7Ejrus/Site/cocoa-text.html
  *   http://www.hcs.harvard.edu/%7Ejrus/Site/selectors.html
@@ -76,7 +77,7 @@
 
     "~v"        = "pageUp:";                               /* M-v          Page Up */
     "~p"        = "pageUp:";                               /* M-p          Page Up - NOT emacs standard */
-    "~P"        = "pageUpAndModifySelection:";             /* M-P          Page Down and modify selection - NOT emacs standard */
+    "~P"        = "pageUpAndModifySelection:";             /* M-P          Page Up and modify selection - NOT emacs standard */
 
     "~n"        = "pageDown:";                             /* M-n          Page Down - NOT emacs standard. DOESN'T WORK because ~n not rebindable!! */
     "~N"        = "pageDownAndModifySelection:";           /* M-N          Page Down and modify selection - NOT emacs standard */

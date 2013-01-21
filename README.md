@@ -9,7 +9,8 @@ From the file:
 
 Additional keybindings for emacs emulation
 
-Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen
+Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen.
+
 Sources:
   http://www.hcs.harvard.edu/%7Ejrus/Site/cocoa-text.html
   http://www.hcs.harvard.edu/%7Ejrus/Site/selectors.html
@@ -41,4 +42,4 @@ defaults write -g NSRepeatCountBinding -string "^u"
 More info about the most common selectors (i.e. where most of the below comes from) may be found here:
   https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html
 
-=========================
+======================
