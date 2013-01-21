@@ -12,8 +12,11 @@ Additional keybindings for emacs emulation
 Originally compiled by Jacob Rus.  Modified/embellished/customized by Aaron Cohen.
 
 Sources:
+
   http://www.hcs.harvard.edu/%7Ejrus/Site/cocoa-text.html
   http://www.hcs.harvard.edu/%7Ejrus/Site/selectors.html
+
+  https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html
 
 WARNING:
 
@@ -39,7 +42,7 @@ Be aware that if you do this *any* use of C-u (even within a sequence of keys) w
 
 defaults write -g NSRepeatCountBinding -string "^u"
 
-More info about the most common selectors (i.e. where most of the below comes from) may be found here:
-  https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSResponder_Class/Reference/Reference.html
+Finally, I would *love* to find a way to rebind M-n and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
+If anybody has any clues, please let me know ...
 
 ======================
