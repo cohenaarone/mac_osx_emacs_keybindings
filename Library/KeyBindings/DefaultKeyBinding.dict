@@ -20,13 +20,13 @@
  *
  * NOTES:
  *
- * We use cut:, copy:, paste: rather than deleteToMark:, selectToMark:, yank: because selectToMark only highlights; it doesn't copy.
- * We thus lose the kill ring, but gain a working ~w.  (That is, attempting to bind ~w to ( "deleteToMark:", "yank:" ) removes formatting,
- *  and repeated use of this keybinding hoses the kill ring.)
- * *However*, this in turn breaks use of "...AndModifySelection:" bindings *unless* one sets the mark before commencing a new use of those bindings.
- * Catch-22.
+ * We use cut:, copy:, paste: for C-w, M-w, C-y rather than deleteToMark:, selectToMark:, yank: for 2 reasons:
  *
- * To see in xml syntax which keybindings Mac OSX has already defined for you, run the following at a terminal prompt and then open ~/mac_key_bindings.dict (: in emacs :) -
+ * 1. It permits copy/paste or cut/paste across applications
+ *
+ * 2. It permits an implementation of M-w that actually works consistently and correctly
+ *
+ * To see in xml syntax which keybindings Mac OSX has already defined for you, run the following at a terminal prompt and then open ~/mac_key_bindings.dict -
  *
  * plutil -convert xml1 /System/Library/Frameworks/AppKit.framework/Versions/C/Resources/StandardKeyBinding.dict -o ~/mac_key_bindings.dict
  *
@@ -37,7 +37,7 @@
  *
  * defaults write -g NSRepeatCountBinding -string "^u"
  *
- * Finally, I would *love* to find a way to rebind M-n and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
+ * Finally, I would *love* to find a way around Macs not allowing the rebinding M-n, M-u, and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
  * If anybody has any clues, please let me know ...
  *
  */
@@ -59,7 +59,7 @@
     "^A" = "moveToLeftEndOfLineAndModifySelection:";   /* C-A      Select from point to beginning of *line* - this is a rebinding */
 
     "^e" = "moveToRightEndOfLine:";                    /* C-e      Move to end of *line* - this is a rebinding */
-    "^E" = "moveToRightEndOfLineAndModifySelection:";  /* C-e      Select from point to end of *line* - this is a rebinding */
+    "^E" = "moveToRightEndOfLineAndModifySelection:";  /* C-E      Select from point to end of *line* - this is a rebinding */
 
     /* Meta shortcuts */
 
@@ -126,6 +126,7 @@
         "u"  = "undo:";                               /* C-x u    Undo */
 
         "^u" = ( "uppercaseWord:", "moveForward:" );  /* C-x C-u  Uppercase word or words in region - won't work if you rebound ^u to be repeat count */
+        "^U" = ( "uppercaseWord:", "moveForward:" );  /* C-x C-U  Uppercase word or words in region - for consistency with ~U, and also for if you rebound ^u */
         "^l" = ( "lowercaseWord:", "moveForward:" );  /* C-x C-l  Lowercase word or words in region */
 
         "h"  = "selectAll:";                          /* C-x h    Select All */
@@ -134,7 +135,7 @@
 
         "k"  = "performClose:";                       /* C-x k    Close */
 
-        "^f" = "openDocument:";                       /* C-x C-f  Open (find file) ... DOESN'T WORK BECAUSE "openDocument:" is buggy */
+        "^f" = "openDocument:";                       /* C-x C-f  Open (find file) ... DOESN'T WORK BECAUSE "openDocument:" IS BUGGY */
 
         "^s" = "save:";                               /* C-x C-s  Save ... works in some apps, not in others */
         "^w" = "saveAs:";                             /* C-x C-w  Save as ... doesn't seem to work */

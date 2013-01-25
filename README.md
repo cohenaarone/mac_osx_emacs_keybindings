@@ -1,10 +1,14 @@
 mac_osx_emacs_keybindings
 =========================
 
-Drop DefaultKeyBinding.dict in ~/Library/KeyBindings/ on Mac OSX.
 
-From the file:
+Installation
+=========================
 
+Copy DefaultKeyBinding.dict into your ~/Library/KeyBindings/ directory on any version of Mac OSX.
+
+
+From the file
 =========================
 
 Additional keybindings for emacs emulation
@@ -28,13 +32,13 @@ defaults write -g NSQuotedKeystrokeBinding -string "^q"
 
 NOTES:
 
-We use cut:, copy:, paste: rather than deleteToMark:, selectToMark:, yank: because selectToMark only highlights; it doesn't copy.
-We thus lose the kill ring, but gain a working ~w.  (That is, attempting to bind ~w to ( "deleteToMark:", "yank:" ) removes formatting,
- and repeated use of this keybinding hoses the kill ring.)
-*However*, this in turn breaks use of "...AndModifySelection:" bindings *unless* one sets the mark before commencing a new use of those bindings.
-Catch-22.
+We use cut:, copy:, paste: for C-w, M-w, C-y rather than deleteToMark:, selectToMark:, yank: for 2 reasons:
 
-To see in xml syntax which keybindings Mac OSX has already defined for you, run the following at a terminal prompt and then open ~/mac_key_bindings.dict (: in emacs :) -
+1. It permits copy/paste or cut/paste across applications
+
+2. It permits an implementation of M-w that actually works consistently and correctly
+
+To see in xml syntax which keybindings Mac OSX has already defined for you, run the following at a terminal prompt and then open ~/mac_key_bindings.dict -
 
 plutil -convert xml1 /System/Library/Frameworks/AppKit.framework/Versions/C/Resources/StandardKeyBinding.dict -o ~/mac_key_bindings.dict
 
@@ -45,7 +49,5 @@ Be aware that if you do this *any* use of C-u (even within a sequence of keys) w
 
 defaults write -g NSRepeatCountBinding -string "^u"
 
-Finally, I would *love* to find a way to rebind M-n and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
+Finally, I would *love* to find a way around Macs not allowing the rebinding M-n, M-u, and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
 If anybody has any clues, please let me know ...
-
-======================
