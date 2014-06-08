@@ -90,10 +90,11 @@
 
     "~/"      = "complete:";                                          /* M-/          Complete (uses English dictionary rather than current doc symbols, thus entirely silly) */
 
-    "~c"      = ( "capitalizeWord:", "moveForward:" );                /* M-c          Capitalize word or words in region - the latter is NOT emacs standard */
-    "~l"      = ( "lowercaseWord:", "moveForward:" );                 /* M-l          Lowercase word or words in region - the latter is NOT emacs standard */
-    "~U"      = ( "uppercaseWord:", "moveForward:" );                 /* M-u          Uppercase word or words in region  - the latter is NOT emacs standard */
-                                                                      /*              ... USE ~U RATHER THAN ~u BECAUSE ~u IS NOT REBINDABLE! */
+    "~c"      = ( "capitalizeWord:", "moveForward:", "moveForward:" );                /* M-c          Capitalize word or words in region - the latter is NOT emacs standard */
+    "~l"      = ( "lowercaseWord:", "moveForward:", "moveForward:" );                 /* M-l          Lowercase word or words in region - the latter is NOT emacs standard */
+    "~U"      = ( "uppercaseWord:", "moveForward:", "moveForward:" );                 /* M-u          Uppercase word or words in region  - the latter is NOT emacs standard */
+                                                                      /*              ... USE ~U RATHER THAN ~u BECAUSE ~u IS NOT REBINDABLE ... */
+    "~u"      = ( "uppercaseWord:", "moveForward:", "moveForward:" );                 /* M-u          Uppercase word or words in region  - the latter is NOT emacs standard */
 
     "~t"      = "transposeWords:";                                    /* M-t          Transpose words ... DOESN'T WORK BECAUSE "transposeWords:" IS BUGGY! */
 
@@ -125,9 +126,9 @@
     "^x" = {
         "u"  = "undo:";                               /* C-x u    Undo */
 
-        "^u" = ( "uppercaseWord:", "moveForward:" );  /* C-x C-u  Uppercase word or words in region - won't work if you rebound ^u to be repeat count */
-        "^U" = ( "uppercaseWord:", "moveForward:" );  /* C-x C-U  Uppercase word or words in region - for consistency with ~U, and also for if you rebound ^u */
-        "^l" = ( "lowercaseWord:", "moveForward:" );  /* C-x C-l  Lowercase word or words in region */
+        "^u" = ( "uppercaseWord:", "moveForward:", "moveForward:" );  /* C-x C-u  Uppercase word or words in region - won't work if you rebound ^u to be repeat count */
+        "^U" = ( "uppercaseWord:", "moveForward:", "moveForward:" );  /* C-x C-U  Uppercase word or words in region - for consistency with ~U, and also for if you rebound ^u */
+        "^l" = ( "lowercaseWord:", "moveForward:", "moveForward:" );  /* C-x C-l  Lowercase word or words in region */
 
         "h"  = "selectAll:";                          /* C-x h    Select All */
 
