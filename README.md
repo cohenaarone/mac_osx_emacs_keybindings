@@ -49,5 +49,51 @@ Be aware that if you do this *any* use of C-u (even within a sequence of keys) w
 
 defaults write -g NSRepeatCountBinding -string "^u"
 
-Finally, I would *love* to find a way around Macs not allowing the rebinding M-n, M-u, and M-e - I can't help but hope that there's some way of hacking whatever it is that prevents their rebinding.
-If anybody has any clues, please let me know ...
+Finally, M-u and M-e are "dead keys" in Cocoa Text.  The hackaround to implement half of what is required below, by making the virtual keys F18 and F19 do what
+ we want those keys to do.  Then, create a custom rule (under Complex Modifications) in Karabiner like so:
+
+```
+{
+  "description": "Expose Option-e/u as F18/F19 for Emacs-style Meta bindings",
+  "manipulators": [
+        {
+      "type": "basic",
+      "from": {
+        "key_code": "e",
+        "modifiers": {
+          "mandatory": [
+            "option"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "f18"
+        }
+      ]
+    },
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "u",
+        "modifiers": {
+          "mandatory": [
+            "option"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "f19"
+        }
+      ]
+    }
+  ]
+}
+```
