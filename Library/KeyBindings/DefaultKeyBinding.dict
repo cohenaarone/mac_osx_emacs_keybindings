@@ -53,13 +53,18 @@
 
     "^g" = "cancelOperation:";                         /* C-g      Bail out; could also use "_cancelKey:" */
 
-    "^j" = "insertNewline:";                           /* C-j      Carriage return */
+    "^j" = "insertNewline:";                           /* C-j      Same as hitting Enter <shrug/> */
 
     "^a" = "moveToLeftEndOfLine:";                     /* C-a      Move to beginning of *line* - this is a rebinding */
     "^A" = "moveToLeftEndOfLineAndModifySelection:";   /* C-A      Select from point to beginning of *line* - this is a rebinding */
 
     "^e" = "moveToRightEndOfLine:";                    /* C-e      Move to end of *line* - this is a rebinding */
     "^E" = "moveToRightEndOfLineAndModifySelection:";  /* C-E      Select from point to end of *line* - this is a rebinding */
+
+    /* "^v"      = "pageDown:";                           /* C-v      Page Down; function broken; Macs now scroll instead */
+    "^v"      = "scrollPageDown:";                     /* C-v PageDown alternative; requires mouse to click in, lame */
+    /* "^V"      = "pageDownAndModifySelection:";         /* C-V      Page Down extending selection; function broken; no scroll equivalent */
+
 
     /* Meta shortcuts */
 
@@ -81,12 +86,9 @@
     "~<"      = "moveToBeginningOfDocument:";                         /* M-<          Move to beginning of document */
     "~>"      = "moveToEndOfDocument:";                               /* M->          Move to end of document */
 
-    "~v"      = "pageUp:";                                            /* M-v          Page Up */
-    "~p"      = "pageUp:";                                            /* M-p          Page Up - NOT emacs standard */
-    "~P"      = "pageUpAndModifySelection:";                          /* M-P          Select from point to next page up - NOT emacs standard */
-
-    "~n"      = "pageDown:";                                          /* M-n          Page Down - NOT emacs standard. DOESN'T WORK BECAUSE ~n IS NOT REBINDABLE! */
-    "~N"      = "pageDownAndModifySelection:";                        /* M-N          Select from point to next page down - NOT emacs standard */
+    /* "~v"      = "pageUp:";                                            /* M-v          Page Up; function broken; Macs now scroll instead */
+    "~v"      = "scrollPageUp:";                                      /* M-v PageUp alternative; requires mouse to click in, lame */
+    /* "~V"      = "pageUpAndModifySelection:";                          /* M-P PageUp extending selection; function broken; no scroll equivalent */
 
     "~/"      = "complete:";                                          /* M-/          Complete (uses English dictionary rather than current doc symbols, thus entirely silly) */
 
@@ -96,6 +98,7 @@
                                                                                       /*              ... USE ~U RATHER THAN ~u BECAUSE ~u IS NOT REBINDABLE ... */
     "~U"      = ( "moveForward:", "uppercaseWord:", "moveForward:" );                 /* M-U          Uppercase word or words in region  - the latter is NOT emacs standard */
     "~u"      = ( "moveForward:", "uppercaseWord:", "moveForward:" );                 /* M-u          Uppercase word or words in region  - the latter is NOT emacs standard */
+    "\UF716"  = ( "moveForward:", "uppercaseWord:", "moveForward:" );                 /* F19          M-u substitute for Karabiner to use */
 
     "~t"      = "transposeWords:";                                    /* M-t          Transpose words ... DOESN'T WORK BECAUSE "transposeWords:" IS BUGGY! */
 
@@ -116,6 +119,8 @@
                   "moveToBeginningOfParagraphAndModifySelection:" );  /* C-M-A        Select from point to beginning of paragraph (see note for ~e) */
 
     "~e"      = ( "moveForward:", "moveToEndOfParagraph:" );          /* M-e          Move to end of paragraph - DOESN'T WORK BECAUSE ~e IS NOT REBINDABLE */
+    "\UF715"  = ( "moveForward:", "moveToEndOfParagraph:" );          /* F18          M-e substitute for Karabiner to use */
+
     "~^e"     = ( "moveForward:", "moveToEndOfParagraph:" );          /* C-M-e        Move to end of paragraph */
     "~E"      = ( "moveForwardAndModifySelection:",
                   "moveToEndOfParagraphAndModifySelection:" );        /* M-E          Select from point to end of paragraph */
@@ -168,9 +173,9 @@
     "^\UF72B"  = "moveToEndOfDocument:";                         /* Ctrl-End */
     "^$\UF72B" = "moveToEndOfDocumentAndModifySelection:";       /* Ctrl-Shift-End */
 
-    "\UF72C"   = "pageUp:";                                      /* Page Up */
-    "$\UF72C"  = "pageUpAndModifySelection:";                    /* Shift-Page Up */
+    /* "\UF72C"   = "pageUp:";                                      /* Page Up, function broken; Macs now scroll instead by default */
+    /* "$\UF72C"  = "pageUpAndModifySelection:";                    /* Shift-Page Up, function broken, no scroll equivalent */
 
-    "\UF72D"   = "pageDown:";                                    /* Page Down */
-    "$\UF72D"  = "pageDownAndModifySelection:";                  /* Shift-Page Down */
+    /* "\UF72D"   = "pageDown:";                                    /* Page Down, function broken; Macs now scroll instead by default */
+    /* "$\UF72D"  = "pageDownAndModifySelection:";                  /* Shift-Page Down, function broken, no scroll equivalent */
 }
